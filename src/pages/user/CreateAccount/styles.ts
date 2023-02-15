@@ -13,7 +13,8 @@ export const CreateAccountContainer = styled.div`
   align-items: center;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.span`
+  font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 500;
   font-size: 2rem;
@@ -21,12 +22,74 @@ export const Title = styled.h1`
   color: #798d77;
 `;
 
-export const Subtitle = styled.h2`
+export const Subtitle = styled.span`
   margin-top: 0.5rem;
 
+  font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 1.625rem;
   color: #798d77;
+`;
+
+interface ILabelProps {
+  marginTop: string;
+}
+
+export const Label = styled.label<ILabelProps>`
+  width: 17.5rem;
+  height: 1.625rem;
+  margin-top: ${props => props.marginTop};
+
+  align-items: center;
+
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  color: #042e00;
+`;
+
+export const Input = styled.input`
+  width: 17.5rem;
+  height: 1.5rem;
+  margin-top: 0.625rem;
+  border: 0.0625rem solid #546053;
+  border-radius: 0.3125rem;
+  background-color: #ffffff;
+
+  align-items: center;
+
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  color: #042900;
+`;
+
+export const CreateAccountButton = styled.button`
+  width: 6.875rem;
+  height: 1.875rem;
+  margin-top: 1.3125rem;
+  border: none;
+  border-radius: 0.3125rem;
+  background-color: ${props => (props.disabled ? '#BAFAB3' : '#043300')};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: ${props => (props.disabled ? '#043300' : '#BAFAB3')};
+
+  :hover {
+    cursor: pointer;
+  }
 `;
