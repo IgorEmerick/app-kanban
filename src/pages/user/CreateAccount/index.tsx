@@ -85,7 +85,10 @@ export function CreateAccount(): JSX.Element {
         <Subtitle>Create account</Subtitle>
 
         <Label marginTop="0.4375rem">Name:</Label>
-        <Input onChange={changeName} />
+        <Input
+          onChange={changeName}
+          invalid_content={!validName && name.length > 0}
+        />
         <InvalidMessage active={!validName && name.length > 0}>
           * Invalid name
         </InvalidMessage>
@@ -95,7 +98,10 @@ export function CreateAccount(): JSX.Element {
         >
           Email:
         </Label>
-        <Input onChange={changeEmail} />
+        <Input
+          onChange={changeEmail}
+          invalid_content={!validEmail && email.length > 0}
+        />
         <InvalidMessage active={!validEmail && email.length > 0}>
           * Invalid email
         </InvalidMessage>
@@ -107,7 +113,11 @@ export function CreateAccount(): JSX.Element {
         >
           Password:
         </Label>
-        <Input type="password" onChange={changePassword} />
+        <Input
+          type="password"
+          onChange={changePassword}
+          invalid_content={!validPassword && password.length > 0}
+        />
         <InvalidMessage active={!validPassword && password.length > 0}>
           * Invalid password
         </InvalidMessage>

@@ -52,11 +52,16 @@ export const Label = styled.label<ILabelProps>`
   color: #042e00;
 `;
 
-export const Input = styled.input`
+interface IInputProps {
+  invalid_content: boolean;
+}
+
+export const Input = styled.input<IInputProps>`
   width: 17.5rem;
   height: 1.5rem;
   margin-top: 0.625rem;
-  border: 0.0625rem solid #546053;
+  border: 0.0625rem solid
+    ${props => (props.invalid_content ? '#FF0000' : '#546053')};
   border-radius: 0.3125rem;
   background-color: #ffffff;
 
