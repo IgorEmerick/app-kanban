@@ -70,10 +70,34 @@ export const Input = styled.input`
   color: #042900;
 `;
 
-export const CreateAccountButton = styled.button`
+interface IInvalidMessageProps {
+  active: boolean;
+}
+
+export const InvalidMessage = styled.span<IInvalidMessageProps>`
+  width: 17.5rem;
+  height: 0.8125rem;
+
+  display: ${props => (props.active ? 'flex' : 'none')};
+  justify-content: flex-start;
+  align-items: center;
+
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.625rem;
+  line-height: 0.8125rem;
+  color: #ff0000;
+`;
+
+interface ICreateAccountButtonProps {
+  margin_top: string;
+}
+
+export const CreateAccountButton = styled.button<ICreateAccountButtonProps>`
   width: 6.875rem;
   height: 1.875rem;
-  margin-top: 1.3125rem;
+  margin-top: ${props => props.margin_top};
   border: none;
   border-radius: 0.3125rem;
   background-color: ${props => (props.disabled ? '#BAFAB3' : '#043300')};

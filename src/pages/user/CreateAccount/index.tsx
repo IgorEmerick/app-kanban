@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { CleanContainer } from '../../../containers/CleanContainer';
 import { validateEmail } from '../../../utils/validateEmail';
@@ -9,6 +9,7 @@ import {
   CreateAccountButton,
   CreateAccountContainer,
   Input,
+  InvalidMessage,
   Label,
   Subtitle,
   Title,
@@ -18,26 +19,21 @@ export function CreateAccount(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [validName, setValidName] = useState(false);
-  const [validEmail, setValidEmail] = useState(false);
-  const [validPassword, setValidPassword] = useState(false);
+  const [validName, setValidName] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPassword, setValidPassword] = useState(true);
+  const [allowButton, setAllowButton] = useState(false);
 
   const changeName = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
-
-    setValidName(validateName(event.target.value));
   }, []);
 
   const changeEmail = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-
-    setValidEmail(validateEmail(event.target.value));
   }, []);
 
   const changePassword = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
-
-    setValidPassword(validatePassword(event.target.value));
   }, []);
 
   const createAccount = useCallback(async () => {
@@ -58,28 +54,70 @@ export function CreateAccount(): JSX.Element {
     }
   }, [email, name, password]);
 
+  const tryAllowButton = useCallback(() => {
+    setAllowButton(
+      validateName(name) && validateEmail(email) && validatePassword(password),
+    );
+  }, [email, name, password]);
+
+  useEffect(() => {
+    setValidName(validateName(name));
+
+    tryAllowButton();
+  }, [name, tryAllowButton]);
+
+  useEffect(() => {
+    setValidEmail(validateEmail(email));
+
+    tryAllowButton();
+  }, [email, tryAllowButton]);
+
+  useEffect(() => {
+    setValidPassword(validatePassword(password));
+
+    tryAllowButton();
+  }, [password, tryAllowButton]);
+
   return (
     <CleanContainer>
       <CreateAccountContainer>
         <Title>Kanban Board</Title>
-
         <Subtitle>Create account</Subtitle>
 
         <Label marginTop="0.4375rem">Name:</Label>
-
         <Input onChange={changeName} />
+        <InvalidMessage active={!validName && name.length > 0}>
+          * Invalid name
+        </InvalidMessage>
 
-        <Label marginTop="0.875rem">Email:</Label>
-
+        <Label
+          marginTop={validName || name.length === 0 ? '0.875rem' : '0.0625rem'}
+        >
+          Email:
+        </Label>
         <Input onChange={changeEmail} />
+        <InvalidMessage active={!validEmail && email.length > 0}>
+          * Invalid email
+        </InvalidMessage>
 
-        <Label marginTop="0.875rem">Password:</Label>
-
+        <Label
+          marginTop={
+            validEmail || email.length === 0 ? '0.875rem' : '0.0625rem'
+          }
+        >
+          Password:
+        </Label>
         <Input type="password" onChange={changePassword} />
+        <InvalidMessage active={!validPassword && password.length > 0}>
+          * Invalid password
+        </InvalidMessage>
 
         <CreateAccountButton
           onClick={createAccount}
-          disabled={!validName || !validEmail || !validPassword}
+          disabled={!allowButton}
+          margin_top={
+            validPassword || password.length === 0 ? '1.3125rem' : '0.5rem'
+          }
         >
           Create account
         </CreateAccountButton>
