@@ -1,14 +1,12 @@
 import './App.css';
 import { AppRoutes } from './routes/AppRoutes';
-import { FontStyle } from './styles/FontStyle';
+import GlobalStyle from './styles/GlobalStyle';
 
-function App() {
+export const App: React.FC = () => {
   return (
     <>
-      <FontStyle />
       <AppRoutes />
+      <GlobalStyle />
     </>
   );
-}
-
-export default App;
+};
