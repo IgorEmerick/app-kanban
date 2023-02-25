@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
+import { defaultSwal } from '../../../components/defaultSwal';
 import { CleanContainer } from '../../../containers/CleanContainer';
 import { validateEmail } from '../../../utils/validateEmail';
 import { validateName } from '../../../utils/validateName';
@@ -44,9 +44,9 @@ export function CreateAccount(): JSX.Element {
         password,
       });
 
-      Swal.fire('Success!', 'Create user successfuly!', 'success');
+      defaultSwal.fire('Success!', 'Create user successfuly!', 'success');
     } catch (error: any) {
-      Swal.fire(
+      defaultSwal.fire(
         `${error.response.status}!`,
         error.response.data.message,
         'error',
