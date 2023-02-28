@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { defaultSwal } from '../../../components/defaultSwal';
 import { CleanContainer } from '../../../containers/CleanContainer';
 import { validateEmail } from '../../../utils/validateEmail';
@@ -24,6 +25,8 @@ export function CreateAccount(): JSX.Element {
   const [validPassword, setValidPassword] = useState(true);
   const [allowButton, setAllowButton] = useState(false);
 
+  const navigate = useNavigate();
+
   const changeName = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   }, []);
@@ -44,7 +47,7 @@ export function CreateAccount(): JSX.Element {
         password,
       });
 
-      defaultSwal.fire('Success!', 'Create user successfuly!', 'success');
+      navigate('/login', { replace: true });
     } catch (error: any) {
       defaultSwal.fire(
         `${error.response.status}!`,
@@ -52,7 +55,7 @@ export function CreateAccount(): JSX.Element {
         'error',
       );
     }
-  }, [email, name, password]);
+  }, [email, name, navigate, password]);
 
   const tryAllowButton = useCallback(() => {
     setAllowButton(

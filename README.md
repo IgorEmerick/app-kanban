@@ -9,7 +9,7 @@
 - [x] Validate password before send request.
 - [x] Should send a request to create an account.
 - [x] Show request result.
-- [ ] Redirect to login page if successfully create account.
+- [x] Redirect to login page if successfully create account.
 
 ### Login
 - [x] Viewe.
