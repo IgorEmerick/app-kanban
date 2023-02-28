@@ -10,4 +10,8 @@ export default createGlobalStyle`
 
     font-family: 'JetBrains Mono', monospace;
   }
+
+  button {
+    cursor: pointer;
+  }
 `;
