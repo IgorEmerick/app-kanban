@@ -13,8 +13,8 @@
 
 ### Login
 - [x] Viewe.
-- [ ] Should not authenticate with invalid email.
-- [ ] Should not authenticate with invalid password.
-- [ ] Show authentication result.
-- [ ] Save authentication token when successfully authenticate.
+- [x] Should not authenticate with invalid email.
+- [x] Should not authenticate with invalid password.
+- [x] Show authentication result.
+- [x] Save authentication token when successfully authenticate.
 - [ ] Redirect to home page when authenticate.
